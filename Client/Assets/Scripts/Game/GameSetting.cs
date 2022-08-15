@@ -1,4 +1,4 @@
-﻿using Unity.VisualScripting.Dependencies.NCalc;
+﻿using UnityEngine;
 
 namespace BoatRace.Game
 {
@@ -15,8 +15,20 @@ namespace BoatRace.Game
             }
         }
         
-        public string serverIP = "127.0.0.1";
-        public bool debugMode = true;
-        
+        private GameSettingConfig _setting = null;
+        public GameSettingConfig Setting
+        {
+            get
+            {
+                if (_setting == null) {
+                    GameSettingConfig setting = Resources.Load<GameSettingConfig>("GameSettingConfig");
+                    if (setting != null)
+                        _setting = UnityEngine.Object.Instantiate(setting);
+                    else
+                        Debug.LogError("Load GameSettingConfig failed");
+                }
+                return _setting;
+            }
+        }
     }
 }

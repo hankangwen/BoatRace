@@ -49,7 +49,7 @@ namespace RemoteDebugger {
             Repaint();
         }
 
-        [MenuItem("SSQA/RemoteDebugger")]
+        [MenuItem("Tools/RemoteDebugger")]
         public static void OnShowWindow() {
             GetWindow<HierarchyPanel>().Show();
         }
