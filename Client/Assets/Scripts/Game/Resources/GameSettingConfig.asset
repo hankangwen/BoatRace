@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: GameSettingConfig
   m_EditorClassIdentifier: 
   serverIP: 127.0.0.1
+  serverPort: 8888
   DEBUG_MODE: 1
   ENABLE_DEBUG_LOG: 1

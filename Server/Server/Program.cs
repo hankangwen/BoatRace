@@ -11,7 +11,8 @@ namespace Server
         static void Main(string[] args)
         {
             Console.WriteLine("Boat Race Server Start.");
-
+            EchoServer server = new EchoServer("127.0.0.1", 8888);
+            server.Start();
         }
     }
 }

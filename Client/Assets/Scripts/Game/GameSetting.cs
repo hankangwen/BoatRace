@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BoatRace.Tools.Debugger;
+using UnityEngine;
 
 namespace BoatRace.Game
 {
@@ -25,7 +26,7 @@ namespace BoatRace.Game
                     if (setting != null)
                         _setting = UnityEngine.Object.Instantiate(setting);
                     else
-                        Debug.LogError("Load GameSettingConfig failed");
+                        Debugger.LogError("Load GameSettingConfig failed");
                 }
                 return _setting;
             }

@@ -5,8 +5,8 @@ namespace BoatRace.Core.Utility
 {
     public static class StringPool
     {
-        private const int MaxSize = 1024;
-        private const int MaxQueueSize = 8;
+        // private const int MaxSize = 1024;
+        // private const int MaxQueueSize = 8;
         public static Dictionary<int, Queue<string>> map = new Dictionary<int, Queue<string>>();
 
         public static void PreAlloc(int size, int count)
