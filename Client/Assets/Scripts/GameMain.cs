@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameMain : MonoBehaviour
+namespace BoatRace
 {
-    void Start()
+    public class GameMain : MonoBehaviour
     {
-        Debug.Log("Boat Race Client Start.");
+        void Start()
+        {
+            Debug.Log("Boat Race Client Start.");
+        }
     }
 }
