@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class DontDestroyOnLoad : MonoBehaviour
+namespace BoatRace.Core.Utility
 {
-    void Awake()
+    public class DontDestroyOnLoad : MonoBehaviour
     {
-        DontDestroyOnLoad(gameObject);
+        void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }
