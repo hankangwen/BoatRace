@@ -21,7 +21,7 @@ MongoDB：[Database Deployments | Cloud: MongoDB Cloud](https://cloud.mongodb.co
 
 [**C#中AES加密的实现_林新发的博客-CSDN博客_c#中aes加密**](https://blog.csdn.net/linxinfa/article/details/89970196)
 
-
+[使用Rider断点调试lua代码_无名小花emm的博客-CSDN博客_rider 调试lua](https://blog.csdn.net/qq_44625873/article/details/123901004)
 
 
 
