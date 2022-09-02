@@ -33,8 +33,6 @@ namespace Server
             server.Start();
             #endregion
 
-
-
             Console.WriteLine("Boat Race Server Stop.");
             Console.ReadKey();
         }

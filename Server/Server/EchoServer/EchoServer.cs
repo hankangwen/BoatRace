@@ -128,8 +128,6 @@ namespace Server
         public void CloseClient(Socket clientfd)
         {
             var state = clients[clientfd];
-
-
             clientfd.Close();
             clients.Remove(clientfd);
             clientStatePool.Release(state);
