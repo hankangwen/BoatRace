@@ -703,7 +703,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: ENABLE_DEBUG_LOG
+    Android: ENABLE_DEBUG_LOG;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1
     Standalone: ENABLE_DEBUG_LOG
   additionalCompilerArguments: {}
   platformArchitecture: {}
