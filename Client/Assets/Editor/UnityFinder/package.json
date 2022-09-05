@@ -1,0 +1,30 @@
+{
+  "name": "com.litefeel.finder",
+  "displayName": "Finder",
+  "version": "1.1.0",
+  "unity": "2018.4",
+  "description": "Find Asset in Unity",
+  "keywords": [
+    "Editor",
+    "Open",
+    "File",
+    "Default",
+    "Application"
+  ],
+  "author": {
+    "name": "litefeel",
+    "email": "litefeel@gmial.com",
+    "url": "https://www.litefeel.com"
+  },
+  "category": "Tools",
+  "type": "tool",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/litefeel/Unity-Finder.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/litefeel/Unity-Finder/issues"
+  },
+  "homepage": "https://github.com/litefeel/Unity-Finder#readme"
+}
