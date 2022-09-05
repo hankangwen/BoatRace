@@ -6,12 +6,7 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
-
-using System;
-using UnityEngine;
-using System.Collections;
 using Unity.EditorCoroutines.Editor;
-using UnityEngine.Networking;
 
 /* 参考文章：https://blog.csdn.net/linxinfa/article/details/115723747 */
 namespace Editor.UILocalization
