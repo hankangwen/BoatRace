@@ -6,12 +6,9 @@ using UnityEngine;
 
 public class CustomInspectorWin
 {
-    [MenuItem("打包AssetBundle/Lock&unlock")]
-
+    [MenuItem("Tool/Test编辑器反射")]
     static void OnLock()
     {
-        
-
         // var type = typeof(EditorWindow).Assembly.GetType("UnityEditor.InspectorWindow");
         //
         // var window = EditorWindow.GetWindow(type);

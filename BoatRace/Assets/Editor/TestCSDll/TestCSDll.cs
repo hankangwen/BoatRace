@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TestCSDll
 {
-    [MenuItem("打包AssetBundle/Test反射")]
+    [MenuItem("Tools/Test反射")]
     static void TestDll()
     {
         // 获取类型
