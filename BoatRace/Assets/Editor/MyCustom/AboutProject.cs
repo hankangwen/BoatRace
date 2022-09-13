@@ -18,4 +18,9 @@ public class AboutProject
         Process.Start("https://trello.com/b/azJXV4Qi/boatrace");
     }
     
+    [MenuItem("Help/AboutProject/Wiki")]
+    static void OpenWiki()
+    {
+        Process.Start("https://github.com/getker/BoatRaceWiki/wiki");
+    }
 }

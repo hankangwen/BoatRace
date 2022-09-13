@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using LuaInterface;
 using UnityEngine;
 
 namespace BoatRace.Game
@@ -18,6 +19,18 @@ namespace BoatRace.Game
             }
         }
 
+        private static LuaState _luaState;
+
+        public LuaState luaState
+        {
+            get
+            {
+                if (_luaState == null)
+                    _luaState = new LuaState();
+                return _luaState;
+            }
+        }
+        
         private static Camera _mainCamera = null;
 
         public Camera mainCamera
