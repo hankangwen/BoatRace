@@ -1,27 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using Unity.VisualScripting;
 
 namespace RemoteDebugger {
     public class RemoteServer : MonoBehaviour {
-        public static bool enable = false;
-
+        public bool enable = false;
         public int port = 4996;
-        // Use this for initialization
-        void Start() {
+        
+#if !UNITY_EDITOR
+        void Start()
+        {
+            // development build默认开启RemoteDebugger
+            if (!enable && Debug.isDebugBuild) {
+                enable = true;
+            }
         }
 
         void OnEnable() {
-            MainServer.Instance.Init(port);
+            if(enable) MainServer.Instance.Init(port);
         }
 
-        // Update is called once per frame
         void Update() {
-            MainServer.Instance.Update();
+            if(enable) MainServer.Instance.Update();
         }
 
         void OnDisable() {
-            MainServer.Instance.UnInit();
+            if(enable) MainServer.Instance.UnInit();
         }
+#endif
+        
     }
 }

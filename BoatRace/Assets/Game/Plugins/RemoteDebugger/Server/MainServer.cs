@@ -1,10 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using UnityEngine;
 
 namespace RemoteDebugger {
     public class MainServer : IDisposable {
+#if UNITY_EDITOR
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetStaticVariables()
+        {
+            inst = null;
+        }
+#endif
+        
         private NetServer net_server = null;
 
         private long _currentTimeInMilliseconds = 0;

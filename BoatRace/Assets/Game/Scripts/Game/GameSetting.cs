@@ -31,5 +31,7 @@ namespace BoatRace.Game
                 return _setting;
             }
         }
+        
+        
     }
 }

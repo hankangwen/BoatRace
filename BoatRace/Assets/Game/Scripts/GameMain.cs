@@ -15,7 +15,7 @@ namespace BoatRace
         void Start()
         {
             Debugger.Log("Boat Race Client Start.");
-            Connect();
+            // Connect();
         }
 
         void Connect()
@@ -26,17 +26,17 @@ namespace BoatRace
             NetManager.Connect(serverIP, port);
         }
         
-        void Update()
-        {
-            NetManager.Update();
-
-            if (Input.GetMouseButtonDown(0)) {
-                NetManager.Send(sendMessage);
-            }
-
-            if (Input.GetMouseButtonDown(1)) {
-                NetManager.Close();
-            }
-        }
+        // void Update()
+        // {
+        //     NetManager.Update();
+        //
+        //     if (Input.GetMouseButtonDown(0)) {
+        //         NetManager.Send(sendMessage);
+        //     }
+        //
+        //     if (Input.GetMouseButtonDown(1)) {
+        //         NetManager.Close();
+        //     }
+        // }
     }
 }
