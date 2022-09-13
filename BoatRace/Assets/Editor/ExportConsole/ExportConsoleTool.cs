@@ -16,26 +16,26 @@ public class ExportConsoleTool
     static FieldInfo _conditionField;
     static bool _isSupport = false;
     
-    [MenuItem("Tools/Debug/Export Console")]
+    [MenuItem("Tools/导出控制台/Export Console")]
     static void ExportConsole()
     {
         DoExportConsole(false);
     }
     
     // 有堆栈信息
-    [MenuItem("Tools/Debug/Export Console With Stack Trace")]
+    [MenuItem("Tools/导出控制台/Export Console With Stack Trace")]
     static void ExportConsoleWithStackTrace()
     {
         DoExportConsole(true);
     }
     
-    [MenuItem("Tools/Debug/Export Console", validate = true)]
+    [MenuItem("Tools/导出控制台/Export Console", validate = true)]
     static bool ExportConsoleValidate()
     {
         return CommonValidate();
     }
     
-    [MenuItem("Tools/Debug/Export Console With Stack Trace", validate = true)]
+    [MenuItem("Tools/导出控制台/Export Console With Stack Trace", validate = true)]
     static bool ExportConsoleWithStackTraceValidate()
     {
         return CommonValidate();

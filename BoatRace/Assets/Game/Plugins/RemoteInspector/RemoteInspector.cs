@@ -10,9 +10,9 @@ public class RemoteInspector : MonoBehaviour
     public short ListenPort = 8080;
     
 #if !UNITY_EDITOR
-    void Start()
+    void Awake()
     {
-        // development build默认开启RemoteDebugger
+        // development build默认开启
         if (!enable && Debug.isDebugBuild) {
             enable = true;
         }

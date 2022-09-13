@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TestCSDll
 {
-    [MenuItem("Tools/Test反射/Test反射")]
+    [MenuItem("Tools/测试Demo/Test反射/Test反射")]
     static void TestDll()
     {
         // 获取类型

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using System.Diagnostics;
 
-public class AboutProject : MonoBehaviour
+public class AboutProject 
 {
-    // Start is called before the first frame update
-    void Start()
+    [MenuItem("Help/AboutProject/GitHub")]
+    static void OpenGithub()
     {
-        
+        Process.Start("https://github.com/getker/BoatRace");
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    [MenuItem("Help/AboutProject/Trello")]
+    static void OpenTrello()
     {
-        
+        Process.Start("https://trello.com/b/azJXV4Qi/boatrace");
     }
+    
 }

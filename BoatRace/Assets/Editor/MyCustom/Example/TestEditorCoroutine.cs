@@ -10,7 +10,7 @@ public class TestEditorCoroutine : EditorWindow
     private EditorCoroutine curEditorCoroutine;
     private bool stopWaiting = false;
     
-    [MenuItem("Tools/TestEditorCoroutine")]
+    [MenuItem("Tools/测试Demo/TestEditorCoroutine")]
     public static void ShowWindow()
     {
         GetWindow<TestEditorCoroutine>("TestEditorCoroutine").Show();

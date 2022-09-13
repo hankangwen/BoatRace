@@ -4,7 +4,7 @@ using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GMPanel : MonoBehaviour
+public class PhoneGMPanel : MonoBehaviour
 {
     private Toggle toggle;
     private GameObject menu;

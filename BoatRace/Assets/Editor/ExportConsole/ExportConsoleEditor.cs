@@ -21,14 +21,14 @@ public class ExportConsoleEditor : EditorWindow
  
     bool _detail = false;
  
-    [MenuItem("Tools/Debug/Export Console Editor")]
+    [MenuItem("Tools/导出控制台/Export Console Editor")]
     static void ShowEditor()
     {
         ExportConsoleEditor editor = EditorWindow.GetWindowWithRect<ExportConsoleEditor>(new Rect(-1, -1, 170, 60), true, "Export Console", true);
         editor.Show();
     }
  
-    [MenuItem("Tools/Debug/Export Console Editor", validate = true)]
+    [MenuItem("Tools/导出控制台/Export Console Editor", validate = true)]
     static bool ExportConsoleMenuValidate()
     {
         return _isSupport && GetEntryCount() > 0;
