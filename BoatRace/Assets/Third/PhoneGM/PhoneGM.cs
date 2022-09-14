@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BoatRace.Game;
+// using BoatRace.Game;
 
 namespace BoatRace.PhoneGM
 {
@@ -25,7 +25,8 @@ namespace BoatRace.PhoneGM
 
         void OnEnable() {
             if(enable) {
-                _uiCanvas = GameManager.Instance.uiCanvas;
+                // _uiCanvas = GameManager.Instance.uiCanvas;
+                _uiCanvas = GameObject.FindWithTag("UICanvas").GetComponent<Canvas>();
                 Instantiate(gmPanel, _uiCanvas.transform);
             }
         }

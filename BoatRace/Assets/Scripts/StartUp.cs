@@ -12,17 +12,17 @@ namespace BoatRace
 {
     public class StartUp : MonoBehaviour
     {
-        public string sendMessage = "123";
+        // public string sendMessage = "123";
 
-        private LuaState luaState;
-        private LuaFunction luaFunc = null;
+        // private LuaState luaState;
+        // private LuaFunction luaFunc = null;
         
         void Awake()
         {
             // 启动luaState
-            luaState = GameManager.Instance.luaState;
-            luaState.Start();            
-            LuaBinder.Bind(luaState);    //将导出的Wrap包注册到lua虚拟机中
+            // luaState = GameManager.Instance.luaState;
+            // luaState.Start();            
+            // LuaBinder.Bind(luaState);    //将导出的Wrap包注册到lua虚拟机中
 
 #if UNITY_EDITOR
             // 连接EmmyLua
@@ -47,14 +47,14 @@ namespace BoatRace
 
         void CallLuaFunc(string funcName)
         {
-            luaFunc = luaState.GetFunction(funcName);
-            if (luaFunc != null) {
-                luaFunc.BeginPCall();
-                luaFunc.PCall();
-                luaFunc.EndPCall();
-                luaFunc.Dispose();
-                luaFunc = null;
-            }
+            // luaFunc = luaState.GetFunction(funcName);
+            // if (luaFunc != null) {
+            //     luaFunc.BeginPCall();
+            //     luaFunc.PCall();
+            //     luaFunc.EndPCall();
+            //     luaFunc.Dispose();
+            //     luaFunc = null;
+            // }
         }
 
         void Start()
