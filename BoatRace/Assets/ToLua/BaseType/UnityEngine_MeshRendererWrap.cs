@@ -124,10 +124,10 @@ public class UnityEngine_MeshRendererWrap
 
 		try
 		{
-			o = ToLua.ToObject(L, 1);
-			UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
-			float ret = obj.scaleInLightmap;
-			LuaDLL.lua_pushnumber(L, ret);
+			// o = ToLua.ToObject(L, 1);
+			// UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
+			// float ret = obj.scaleInLightmap;
+			// LuaDLL.lua_pushnumber(L, ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -143,10 +143,10 @@ public class UnityEngine_MeshRendererWrap
 
 		try
 		{
-			o = ToLua.ToObject(L, 1);
-			UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
-			bool ret = obj.stitchLightmapSeams;
-			LuaDLL.lua_pushboolean(L, ret);
+			// o = ToLua.ToObject(L, 1);
+			// UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
+			// bool ret = obj.stitchLightmapSeams;
+			// LuaDLL.lua_pushboolean(L, ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -200,10 +200,10 @@ public class UnityEngine_MeshRendererWrap
 
 		try
 		{
-			o = ToLua.ToObject(L, 1);
-			UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
-			obj.scaleInLightmap = arg0;
+			// o = ToLua.ToObject(L, 1);
+			// UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
+			// float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+			// obj.scaleInLightmap = arg0;
 			return 0;
 		}
 		catch(Exception e)
@@ -219,10 +219,10 @@ public class UnityEngine_MeshRendererWrap
 
 		try
 		{
-			o = ToLua.ToObject(L, 1);
-			UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
-			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
-			obj.stitchLightmapSeams = arg0;
+			// o = ToLua.ToObject(L, 1);
+			// UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
+			// bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			// obj.stitchLightmapSeams = arg0;
 			return 0;
 		}
 		catch(Exception e)

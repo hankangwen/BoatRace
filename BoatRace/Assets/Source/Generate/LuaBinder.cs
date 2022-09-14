@@ -21,7 +21,6 @@ public static class LuaBinder
 		UnityEngine_MaterialWrap.Register(L);
 		UnityEngine_LightWrap.Register(L);
 		UnityEngine_CameraWrap.Register(L);
-		UnityEngine_AudioSourceWrap.Register(L);
 		UnityEngine_BehaviourWrap.Register(L);
 		UnityEngine_MonoBehaviourWrap.Register(L);
 		UnityEngine_GameObjectWrap.Register(L);
@@ -54,7 +53,6 @@ public static class LuaBinder
 		UnityEngine_QualitySettingsWrap.Register(L);
 		UnityEngine_RenderSettingsWrap.Register(L);
 		UnityEngine_ResourcesWrap.Register(L);
-		UnityEngine_AudioBehaviourWrap.Register(L);
 		L.BeginModule("Networking");
 		UnityEngine_Networking_UnityWebRequestWrap.Register(L);
 		UnityEngine_Networking_DownloadHandlerWrap.Register(L);
@@ -79,7 +77,6 @@ public static class LuaBinder
 		L.EndModule();
 		L.EndModule();
 		L.BeginPreLoad();
-		L.AddPreLoad("UnityEngine.MeshRenderer", new LuaCSFunction(LuaOpen_UnityEngine_MeshRenderer), typeof(UnityEngine.MeshRenderer));
 		L.AddPreLoad("UnityEngine.BoxCollider", new LuaCSFunction(LuaOpen_UnityEngine_BoxCollider), typeof(UnityEngine.BoxCollider));
 		L.AddPreLoad("UnityEngine.MeshCollider", new LuaCSFunction(LuaOpen_UnityEngine_MeshCollider), typeof(UnityEngine.MeshCollider));
 		L.AddPreLoad("UnityEngine.SphereCollider", new LuaCSFunction(LuaOpen_UnityEngine_SphereCollider), typeof(UnityEngine.SphereCollider));
@@ -417,24 +414,6 @@ public static class LuaBinder
 				func.Dispose();
 				self.Dispose();
 			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LuaOpen_UnityEngine_MeshRenderer(IntPtr L)
-	{
-		try
-		{
-			LuaState state = LuaState.Get(L);
-			state.BeginPreModule("UnityEngine");
-			UnityEngine_MeshRendererWrap.Register(state);
-			int reference = state.GetMetaReference(typeof(UnityEngine.MeshRenderer));
-			state.EndPreModule(L, reference);
 			return 1;
 		}
 		catch(Exception e)

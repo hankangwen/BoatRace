@@ -95,11 +95,11 @@ public class UnityEngine_AudioSourceWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
-			int arg0 = (int)LuaDLL.luaL_checkinteger(L, 2);
-			bool o = obj.PlayOnGamepad(arg0);
-			LuaDLL.lua_pushboolean(L, o);
+			// ToLua.CheckArgsCount(L, 2);
+			// UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
+			// int arg0 = (int)LuaDLL.luaL_checkinteger(L, 2);
+			// bool o = obj.PlayOnGamepad(arg0);
+			// LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
 		catch (Exception e)
@@ -113,10 +113,10 @@ public class UnityEngine_AudioSourceWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
-			bool o = obj.DisableGamepadOutput();
-			LuaDLL.lua_pushboolean(L, o);
+			// ToLua.CheckArgsCount(L, 1);
+			// UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
+			// bool o = obj.DisableGamepadOutput();
+			// LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
 		catch (Exception e)
@@ -130,12 +130,12 @@ public class UnityEngine_AudioSourceWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
-			int arg0 = (int)LuaDLL.luaL_checkinteger(L, 2);
-			int arg1 = (int)LuaDLL.luaL_checkinteger(L, 3);
-			bool o = obj.SetGamepadSpeakerMixLevel(arg0, arg1);
-			LuaDLL.lua_pushboolean(L, o);
+			// ToLua.CheckArgsCount(L, 3);
+			// UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
+			// int arg0 = (int)LuaDLL.luaL_checkinteger(L, 2);
+			// int arg1 = (int)LuaDLL.luaL_checkinteger(L, 3);
+			// bool o = obj.SetGamepadSpeakerMixLevel(arg0, arg1);
+			// LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
 		catch (Exception e)
@@ -149,11 +149,11 @@ public class UnityEngine_AudioSourceWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
-			int arg0 = (int)LuaDLL.luaL_checkinteger(L, 2);
-			bool o = obj.SetGamepadSpeakerMixLevelDefault(arg0);
-			LuaDLL.lua_pushboolean(L, o);
+			// ToLua.CheckArgsCount(L, 2);
+			// UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
+			// int arg0 = (int)LuaDLL.luaL_checkinteger(L, 2);
+			// bool o = obj.SetGamepadSpeakerMixLevelDefault(arg0);
+			// LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
 		catch (Exception e)
@@ -167,12 +167,12 @@ public class UnityEngine_AudioSourceWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
-			int arg0 = (int)LuaDLL.luaL_checkinteger(L, 2);
-			bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
-			bool o = obj.SetGamepadSpeakerRestrictedAudio(arg0, arg1);
-			LuaDLL.lua_pushboolean(L, o);
+			// ToLua.CheckArgsCount(L, 3);
+			// UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject<UnityEngine.AudioSource>(L, 1);
+			// int arg0 = (int)LuaDLL.luaL_checkinteger(L, 2);
+			// bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
+			// bool o = obj.SetGamepadSpeakerRestrictedAudio(arg0, arg1);
+			// LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
 		catch (Exception e)
@@ -186,10 +186,10 @@ public class UnityEngine_AudioSourceWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.GamepadSpeakerOutputType arg0 = (UnityEngine.GamepadSpeakerOutputType)ToLua.CheckObject(L, 1, TypeTraits<UnityEngine.GamepadSpeakerOutputType>.type);
-			bool o = UnityEngine.AudioSource.GamepadSpeakerSupportsOutputType(arg0);
-			LuaDLL.lua_pushboolean(L, o);
+			// ToLua.CheckArgsCount(L, 1);
+			// UnityEngine.GamepadSpeakerOutputType arg0 = (UnityEngine.GamepadSpeakerOutputType)ToLua.CheckObject(L, 1, TypeTraits<UnityEngine.GamepadSpeakerOutputType>.type);
+			// bool o = UnityEngine.AudioSource.GamepadSpeakerSupportsOutputType(arg0);
+			// LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
 		catch (Exception e)
@@ -701,10 +701,10 @@ public class UnityEngine_AudioSourceWrap
 
 		try
 		{
-			o = ToLua.ToObject(L, 1);
-			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)o;
-			UnityEngine.GamepadSpeakerOutputType ret = obj.gamepadSpeakerOutputType;
-			ToLua.Push(L, ret);
+			// o = ToLua.ToObject(L, 1);
+			// UnityEngine.AudioSource obj = (UnityEngine.AudioSource)o;
+			// UnityEngine.GamepadSpeakerOutputType ret = obj.gamepadSpeakerOutputType;
+			// ToLua.Push(L, ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -1252,10 +1252,10 @@ public class UnityEngine_AudioSourceWrap
 
 		try
 		{
-			o = ToLua.ToObject(L, 1);
-			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)o;
-			UnityEngine.GamepadSpeakerOutputType arg0 = (UnityEngine.GamepadSpeakerOutputType)ToLua.CheckObject(L, 2, TypeTraits<UnityEngine.GamepadSpeakerOutputType>.type);
-			obj.gamepadSpeakerOutputType = arg0;
+			// o = ToLua.ToObject(L, 1);
+			// UnityEngine.AudioSource obj = (UnityEngine.AudioSource)o;
+			// UnityEngine.GamepadSpeakerOutputType arg0 = (UnityEngine.GamepadSpeakerOutputType)ToLua.CheckObject(L, 2, TypeTraits<UnityEngine.GamepadSpeakerOutputType>.type);
+			// obj.gamepadSpeakerOutputType = arg0;
 			return 0;
 		}
 		catch(Exception e)
