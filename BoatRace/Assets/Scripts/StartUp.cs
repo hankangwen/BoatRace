@@ -3,22 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using BoatRace.Game;
 using BoatRace.Net;
+using LuaFramework;
 using LuaInterface;
 using Unity.VisualScripting;
 using UnityEngine;
-// using Debugger = BoatRace.Tools.Debugger.Debugger;
 
 namespace BoatRace
 {
+    /// <summary>
+    /// 启动脚本
+    /// </summary>
     public class StartUp : MonoBehaviour
     {
-        // public string sendMessage = "123";
-
-        // private LuaState luaState;
-        // private LuaFunction luaFunc = null;
-        
         void Awake()
         {
+            // 热更新之前初始化一些模块
+            InitBeforeHotUpdate();
+            
             // 启动luaState
             // luaState = GameManager.Instance.luaState;
             // luaState.Start();            
@@ -43,6 +44,62 @@ namespace BoatRace
             
             // luaState.Require("Main");
             // CallLuaFunc("Main");
+        }
+        
+        /// <summary>
+        /// 热更新之前初始化一些模块
+        /// </summary>
+        private void InitBeforeHotUpdate()
+        {
+            // 限制游戏帧数
+            Application.targetFrameRate = AppConst.GameFrameRate;
+            // 手机常亮
+            Screen.sleepTimeout = -1;
+            // 后台运行
+            Application.runInBackground = true;
+            
+            // 日志
+            GameLogger.Init();
+            LogCat.Init();
+            
+            
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            Debugger.Log("Boat Race Client Start.");
+            // // 网络消息注册
+            // m_networkMsgEventRegister.RegistNetworkMsgEvent();
+            // // 界面管理器
+            // PanelMgr.instance.Init();
+            //
+            // // 版本号
+            // VersionMgr.instance.Init();
+            //
+            // // 预加载AssetBundle
+            // AssetBundleMgr.instance.PreloadAssetBundles();
+            // // TODO 加载必要的资源AssetBundle
+            //
+            //
+            // TimerThread.instance.Init();
+            // ClientNet.instance.Init();
+            // ScreenCapture.Init();
         }
 
         void CallLuaFunc(string funcName)
@@ -71,8 +128,12 @@ namespace BoatRace
             NetManager.Connect(serverIP, port);
         }
         
-        // void Update()
-        // {
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A)) {
+                
+                Debugger.Log("Boat Race Client Staddddddddddddddddddddddddrt.");
+            }
         //     NetManager.Update();
         //
         //     if (Input.GetMouseButtonDown(0)) {
@@ -82,7 +143,7 @@ namespace BoatRace
         //     if (Input.GetMouseButtonDown(1)) {
         //         NetManager.Close();
         //     }
-        // }
+        }
 
         void OnDestroy()
         {
