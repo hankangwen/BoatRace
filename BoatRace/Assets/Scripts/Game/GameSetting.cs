@@ -1,4 +1,4 @@
-﻿using BoatRace.Tools.Debugger;
+﻿using LuaInterface;
 using UnityEngine;
 
 namespace BoatRace.Game

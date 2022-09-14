@@ -6,11 +6,11 @@ using BoatRace.Net;
 using LuaInterface;
 using Unity.VisualScripting;
 using UnityEngine;
-using Debugger = BoatRace.Tools.Debugger.Debugger;
+// using Debugger = BoatRace.Tools.Debugger.Debugger;
 
 namespace BoatRace
 {
-    public class GameMain : MonoBehaviour
+    public class StartUp : MonoBehaviour
     {
         public string sendMessage = "123";
 
@@ -26,23 +26,23 @@ namespace BoatRace
 
 #if UNITY_EDITOR
             // 连接EmmyLua
-            string script =
-                @"  function ConnectEmmyLua()                        
-                        pcall(function()
-                                package.cpath = package.cpath .. ';' .. UnityEngine.Application.dataPath .. '/../../Tools/Emmylua/emmy_core.dll'
-                                local dbg = require('emmy_core')
-                                dbg.tcpConnect('localhost', 9968)
-                              end)
-                    end
-                    EmmyLuaCon = {}
-                    EmmyLuaCon.luaFunc = ConnectEmmyLua
-                ";
-            luaState.DoString(script, "GameMain.cs");
-            CallLuaFunc("EmmyLuaCon.luaFunc");
+            // string script =
+            //     @"  function ConnectEmmyLua()                        
+            //             pcall(function()
+            //                     package.cpath = package.cpath .. ';' .. UnityEngine.Application.dataPath .. '/../../Tools/Emmylua/emmy_core.dll'
+            //                     local dbg = require('emmy_core')
+            //                     dbg.tcpConnect('localhost', 9968)
+            //                   end)
+            //         end
+            //         EmmyLuaCon = {}
+            //         EmmyLuaCon.luaFunc = ConnectEmmyLua
+            //     ";
+            // luaState.DoString(script, "GameMain.cs");
+            // CallLuaFunc("EmmyLuaCon.luaFunc");
 #endif
             
-            luaState.Require("Main");
-            CallLuaFunc("Main");
+            // luaState.Require("Main");
+            // CallLuaFunc("Main");
         }
 
         void CallLuaFunc(string funcName)
@@ -86,14 +86,14 @@ namespace BoatRace
 
         void OnDestroy()
         {
-            if (luaFunc != null)
-            {
-                luaFunc.Dispose();
-                luaFunc = null;
-            }
-
-            luaState.Dispose();
-            luaState = null;
+            // if (luaFunc != null)
+            // {
+            //     luaFunc.Dispose();
+            //     luaFunc = null;
+            // }
+            //
+            // luaState.Dispose();
+            // luaState = null;
         }
     }
 }
