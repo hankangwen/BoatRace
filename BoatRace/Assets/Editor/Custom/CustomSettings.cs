@@ -99,7 +99,7 @@ public static class CustomSettings
         _GT(typeof(Light)),
         _GT(typeof(Rigidbody)),
         _GT(typeof(Camera)),
-        // _GT(typeof(AudioSource)),
+        _GT(typeof(AudioSource)),
         //_GT(typeof(LineRenderer))
         //_GT(typeof(TrailRenderer))
 #endif
@@ -145,7 +145,7 @@ public static class CustomSettings
         _GT(typeof(Space)),      
        
 
-        // _GT(typeof(MeshRenderer)),
+        _GT(typeof(MeshRenderer)),
 #if !UNITY_5_4_OR_NEWER
         _GT(typeof(ParticleEmitter)),
         _GT(typeof(ParticleRenderer)),
@@ -176,7 +176,7 @@ public static class CustomSettings
 
     public static List<Type> dynamicList = new List<Type>()
     {
-        // typeof(MeshRenderer),
+        typeof(MeshRenderer),
 #if !UNITY_5_4_OR_NEWER
         typeof(ParticleEmitter),
         typeof(ParticleRenderer),
