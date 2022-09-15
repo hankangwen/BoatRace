@@ -32,6 +32,12 @@ RemoteDebugger：RemoteDebugger
 
 [Easy Save - The Complete Save Data & Serialization System | 实用工具 工具 | Unity Asset Store](https://assetstore.unity.com/packages/tools/utilities/easy-save-the-complete-save-data-serialization-system-768#releases)
 
+### Other
+
+Unity隐藏指定的黄色warning警告 
+```csharp
+#pragma warning disable 0618
+```
 
 
 #### About
