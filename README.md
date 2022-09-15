@@ -48,6 +48,7 @@ RemoteDebugger：RemoteDebugger
 
 [《Unity 3D游戏客户端基础框架》tolua 框架接入](https://blog.csdn.net/linshuhe1/article/details/77816480)
 
+[IllegalWordsDetection](https://github.com/NewbieGameCoder/IllegalWordsDetection)
 
 ### 工具
 
