@@ -32,6 +32,8 @@ RemoteDebugger：RemoteDebugger
 
 [Easy Save - The Complete Save Data & Serialization System | 实用工具 工具 | Unity Asset Store](https://assetstore.unity.com/packages/tools/utilities/easy-save-the-complete-save-data-serialization-system-768#releases)
 
+[unity-与skynet通信二三事(sproto,crypt)](https://blog.csdn.net/yangxuan0261/article/details/78037789?locationNum=10&fps=1)
+
 ### Other
 
 Unity隐藏指定的黄色warning警告 
