@@ -20,6 +20,15 @@ namespace BoatRace
             // 热更新之前初始化一些模块
             InitBeforeHotUpdate();
             
+            // 热更新
+            // HotUpdatePanel.Show(() =>
+            // {
+            //     // 热更新后初始化一些模块
+            //     InitAfterHotUpdate();
+            //     // 启动游戏
+            //     StartGame();
+            // });
+            
             // 启动luaState
             // luaState = GameManager.Instance.luaState;
             // luaState.Start();            
@@ -65,23 +74,21 @@ namespace BoatRace
                 LogCat.Init();
 #endif
             
-            
             // // 网络消息注册
             // m_networkMsgEventRegister.RegistNetworkMsgEvent();
-            // // 界面管理器
-            // PanelMgr.instance.Init();
-            //
-            // // 版本号
-            // VersionMgr.instance.Init();
-            //
-            // // 预加载AssetBundle
-            // AssetBundleMgr.instance.PreloadAssetBundles();
-            // // TODO 加载必要的资源AssetBundle
-            //
-            //
-            // TimerThread.instance.Init();
+            
+            // 界面管理器
+            PanelMgr.Instance.Init();
+            // 版本号
+            VersionMgr.Instance.Init();
+            // 预加载AssetBundle
+            AssetBundleMgr.Instance.PreloadAssetBundles();
+            // TODO 加载必要的资源AssetBundle
+            
+            
+            TimerThread.Instance.Init();
             // ClientNet.instance.Init();
-            // ScreenCapture.Init();
+            ScreenCapture.Init();
         }
 
         void CallLuaFunc(string funcName)
