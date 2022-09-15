@@ -692,18 +692,43 @@ namespace LuaInterface
             return "@" + name;
         }
 
-        public void DoFile(string fileName)
-        {
-            byte[] buffer = LoadFileBuffer(fileName);
-            fileName = LuaChunkName(fileName);
-            LuaLoadBuffer(buffer, fileName);
-        }
+        // public void DoFile(string fileName)
+        // {
+        //     byte[] buffer = LoadFileBuffer(fileName);
+        //     fileName = LuaChunkName(fileName);
+        //     LuaLoadBuffer(buffer, fileName);
+        // }
 
-        public T DoFile<T>(string fileName)
+        // public T DoFile<T>(string fileName)
+        // {
+        //     byte[] buffer = LoadFileBuffer(fileName);
+        //     fileName = LuaChunkName(fileName);
+        //     return LuaLoadBuffer<T>(buffer, fileName);
+        // }
+
+        public object[] DoFile(string fileName)
         {
-            byte[] buffer = LoadFileBuffer(fileName);
-            fileName = LuaChunkName(fileName);
-            return LuaLoadBuffer<T>(buffer, fileName);
+#if UNITY_EDITOR
+            if (!beStart)
+            {
+                throw new LuaException("you must call Start() first to initialize LuaState");
+            }
+#endif                        
+            byte[] buffer = LuaFileUtils.Instance.ReadFile(fileName);
+
+            if (buffer == null)
+            {
+                string error = string.Format("cannot open {0}: No such file or directory", fileName);
+                error += LuaFileUtils.Instance.FindFileError(fileName);
+                throw new LuaException(error);
+            }
+
+            //if (LuaConst.openZbsDebugger)
+            //{
+            //    fileName = LuaFileUtils.Instance.FindFile(fileName);
+            //}
+
+            return LuaLoadBuffer<object[]>(buffer, fileName);
         }
 
         //注意fileName与lua文件中require一致。
@@ -721,7 +746,7 @@ namespace LuaInterface
 
             LuaSetTop(top);            
         }
-
+        
         public T Require<T>(string fileName)
         {
             int top = LuaGetTop();
@@ -2175,6 +2200,24 @@ namespace LuaInterface
         public static bool operator != (LuaState a, LuaState b)
         {
             return !(a == b);
+        }
+
+        public string GetLuaFunDebugStr()
+        {
+            if (funcMap.Count > 0)
+            {
+                string str = "";
+                foreach(KeyValuePair<string, WeakReference> kvp in funcMap)
+                {
+                    str += kvp.Key + "    ";
+                }
+
+                return str;
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         public void PrintTable(string name)

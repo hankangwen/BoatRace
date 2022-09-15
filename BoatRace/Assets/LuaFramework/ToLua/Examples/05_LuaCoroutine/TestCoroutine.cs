@@ -22,8 +22,8 @@ public class TestCoroutine : MonoBehaviour
         lua.Start();
         LuaBinder.Bind(lua);
         DelegateFactory.Init();         
-        looper = gameObject.AddComponent<LuaLooper>();
-        looper.luaState = lua;
+        // looper = gameObject.AddComponent<LuaLooper>();
+        // looper.luaState = lua;
 
         //lua.DoString(luaFile.text, "TestLuaCoroutine.lua");
         lua.Require("TestLuaCoroutine");

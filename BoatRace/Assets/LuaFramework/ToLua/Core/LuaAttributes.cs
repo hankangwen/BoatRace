@@ -48,6 +48,14 @@ namespace LuaInterface
         }
     }
 
+    public class ExportToLuaAttribute : System.Attribute
+    {
+        public ExportToLuaAttribute()
+        {
+
+        }
+    }
+    
     public class OverrideDefinedAttribute: System.Attribute
     {
         public OverrideDefinedAttribute()

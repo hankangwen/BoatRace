@@ -132,8 +132,8 @@ public class LuaClient : MonoBehaviour
 
     protected void StartLooper()
     {
-        loop = gameObject.AddComponent<LuaLooper>();
-        loop.luaState = luaState;
+        // loop = gameObject.AddComponent<LuaLooper>();
+        // loop.luaState = luaState;
     }
 
     protected virtual void Bind()

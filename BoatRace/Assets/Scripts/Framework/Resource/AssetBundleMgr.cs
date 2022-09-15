@@ -8,26 +8,6 @@ using System.IO;
 
 public class AssetBundleMgr
 {
-    /// <summary>
-    /// 常规配置AssetBundle (C# 使用的xml配置表)
-    /// </summary>
-    public AssetBundle m_normalCfgBundle;
-
-
-    private Dictionary<string, Object> m_assets;
-    private Dictionary<string, AssetBundle> m_bundles;
-
-    private static AssetBundleMgr s_instance;
-    public static AssetBundleMgr Instance
-    {
-        get
-        {
-            if (null == s_instance)
-                s_instance = new AssetBundleMgr();
-            return s_instance;
-        }
-    }
-    
     public AssetBundleMgr()
     {
         m_bundles = new Dictionary<string, AssetBundle>();
@@ -191,6 +171,26 @@ public class AssetBundleMgr
 #else
             return Application.streamingAssetsPath + "/res/";
 #endif
+        }
+    }
+
+    /// <summary>
+    /// 常规配置AssetBundle (C# 使用的xml配置表)
+    /// </summary>
+    public AssetBundle m_normalCfgBundle;
+
+
+    private Dictionary<string, Object> m_assets;
+    private Dictionary<string, AssetBundle> m_bundles;
+
+    private static AssetBundleMgr s_instance;
+    public static AssetBundleMgr Instance
+    {
+        get
+        {
+            if (null == s_instance)
+                s_instance = new AssetBundleMgr();
+            return s_instance;
         }
     }
 }

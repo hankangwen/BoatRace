@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using BoatRace.Game;
 using BoatRace.Net;
 using LuaFramework;
-using LuaInterface;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BoatRace
@@ -21,38 +16,29 @@ namespace BoatRace
             InitBeforeHotUpdate();
             
             // 热更新
-            // HotUpdatePanel.Show(() =>
-            // {
-            //     // 热更新后初始化一些模块
-            //     InitAfterHotUpdate();
-            //     // 启动游戏
-            //     StartGame();
-            // });
-            
-            // 启动luaState
-            // luaState = GameManager.Instance.luaState;
-            // luaState.Start();            
-            // LuaBinder.Bind(luaState);    //将导出的Wrap包注册到lua虚拟机中
+            HotUpdatePanel.Show(() =>
+            {
+                // 热更新后初始化一些模块
+                InitAfterHotUpdate();
+                // 启动游戏
+                StartGame();
+            });
+        }
 
+        private void StartGame()
+        {
+            //启动lua框架//
+            LuaFramework.AppFacade.Instance.StartUp(() =>
+            {
 #if UNITY_EDITOR
-            // 连接EmmyLua
-            // string script =
-            //     @"  function ConnectEmmyLua()                        
-            //             pcall(function()
-            //                     package.cpath = package.cpath .. ';' .. UnityEngine.Application.dataPath .. '/../../Tools/Emmylua/emmy_core.dll'
-            //                     local dbg = require('emmy_core')
-            //                     dbg.tcpConnect('localhost', 9968)
-            //                   end)
-            //         end
-            //         EmmyLuaCon = {}
-            //         EmmyLuaCon.luaFunc = ConnectEmmyLua
-            //     ";
-            // luaState.DoString(script, "GameMain.cs");
-            // CallLuaFunc("EmmyLuaCon.luaFunc");
+                ConnectEmmyLua();
 #endif
-            
-            // luaState.Require("Main");
-            // CallLuaFunc("Main");
+                // LuaCall.CallFunc("Main.Init");
+                // LuaCall.CallFunc("Main.Start");
+
+                // 监听关闭游戏事件
+                AppQuitDefend.Init();
+            });
         }
         
         /// <summary>
@@ -90,23 +76,22 @@ namespace BoatRace
             // ClientNet.instance.Init();
             ScreenCapture.Init();
         }
-
-        void CallLuaFunc(string funcName)
+        
+        
+        /// <summary>
+        /// 热更新后初始化一些模块
+        /// </summary>
+        private void InitAfterHotUpdate()
         {
-            // luaFunc = luaState.GetFunction(funcName);
-            // if (luaFunc != null) {
-            //     luaFunc.BeginPCall();
-            //     luaFunc.PCall();
-            //     luaFunc.EndPCall();
-            //     luaFunc.Dispose();
-            //     luaFunc = null;
-            // }
-        }
-
-        void Start()
-        {
-            Debugger.Log("Boat Race Client Start.");
-            // Connect();
+            // 资源管理器
+            ResourceManager.instance.Init();
+            // 音效管理器
+            AudioMgr.instance.Init();
+            // 多语言
+            LanguageMgr.instance.Init();
+            I18N.instance.Init();
+            // 图集管理器
+            SpriteManager.instance.Init();
         }
 
         void Connect()
@@ -119,19 +104,27 @@ namespace BoatRace
         
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.A)) {
-                
-                Debugger.Log("Boat Race Client Staddddddddddddddddddddddddrt.");
-            }
-        //     NetManager.Update();
-        //
-        //     if (Input.GetMouseButtonDown(0)) {
-        //         NetManager.Send(sendMessage);
-        //     }
-        //
-        //     if (Input.GetMouseButtonDown(1)) {
-        //         NetManager.Close();
-        //     }
+            AppFacade.Instance.UpdateEx();
+            
+            // NetManager.Update();
+            //
+            // if (Input.GetMouseButtonDown(0)) {
+            //     NetManager.Send(sendMessage);
+            // }
+            //
+            // if (Input.GetMouseButtonDown(1)) {
+            //     NetManager.Close();
+            // }
+        }
+        
+        private void LateUpdate()
+        {
+            AppFacade.Instance.LateUpdateEx();
+        }
+
+        private void FixedUpdate()
+        {
+            AppFacade.Instance.FixedUpdateEx();
         }
 
         void OnDestroy()
@@ -145,5 +138,28 @@ namespace BoatRace
             // luaState.Dispose();
             // luaState = null;
         }
+        
+        
+#if UNITY_EDITOR
+        private void ConnectEmmyLua()
+        {
+            // 连接EmmyLua
+            string script =
+                @"  function ConnectEmmyLua()                        
+                    pcall(function()
+                            package.cpath = package.cpath .. ';' .. UnityEngine.Application.dataPath .. '/../Tools/Emmylua/emmy_core.dll'
+                            local dbg = require('emmy_core')
+                            dbg.tcpConnect('localhost', 9966)
+                          end)
+                end
+                EmmyLuaCon = {}
+                EmmyLuaCon.luaFunc = ConnectEmmyLua
+            ";
+
+            var luaState = LuaManager.instance.GetState();
+            luaState.DoString(script, "StartUp.cs");
+            LuaCall.CallFunc("EmmyLuaCon.luaFunc");
+        }
+#endif
     }
 }

@@ -54,6 +54,8 @@ namespace LuaInterface
         protected List<string> searchPaths = new List<string>();
         protected Dictionary<string, AssetBundle> zipMap = new Dictionary<string, AssetBundle>();
 
+        private List<AssetBundle> m_luaBundleList = new List<AssetBundle>();
+        
         protected static LuaFileUtils instance = null;
 
         public LuaFileUtils()
@@ -61,6 +63,25 @@ namespace LuaInterface
             instance = this;
         }
 
+        public void Init()
+        {
+            if (beZip)
+            {
+                //update (只有在更新时候用到)
+                var luaUpdateAb = AssetBundleMgr.Instance.LoadAssetBundle("lua_update.bundle");
+                if (luaUpdateAb != null)
+                {
+                    m_luaBundleList.Add(luaUpdateAb);
+                }
+
+                var luaScriptsAb = AssetBundleMgr.Instance.LoadAssetBundle("lua.bundle");
+                if (luaScriptsAb != null)
+                {
+                    m_luaBundleList.Add(luaScriptsAb);
+                }
+            }
+        }
+        
         public virtual void Dispose()
         {
             if (instance != null)
@@ -178,6 +199,57 @@ namespace LuaInterface
             }
         }
 
+        //读取非.lua文件
+        public string ReadOtherFile(string fileName)
+        {
+            if (!beZip)
+            {
+                string str = null;
+                //从项目里面读取
+                string filePath = LuaConst.luaDir + "/" + fileName;
+                if (File.Exists(filePath))
+                {
+#if !UNITY_WEBPLAYER
+                    str = File.ReadAllText(filePath);
+#else
+                    throw new LuaException("can't run in web platform, please switch to other platform");
+#endif
+                }
+
+                return str;
+
+            }
+            else
+            {
+                return ReadStringFromAssetBundle(fileName);
+            }
+
+        }
+
+        public string ReadStringFromFile(string fileName)
+        {
+            if (!beZip)
+            {
+                string path = FindFile(fileName);
+                string str = null;
+
+                if (!string.IsNullOrEmpty(path) && File.Exists(path))
+                {
+#if !UNITY_WEBPLAYER
+                    str = File.ReadAllText(path);
+#else
+                    throw new LuaException("can't run in web platform, please switch to other platform");
+#endif
+                }
+
+                return str;
+            }
+            else
+            {
+                return ReadStringFromAssetBundle(fileName);
+            }
+        }
+        
         public virtual string FindFileError(string fileName)
         {
             if (Path.IsPathRooted(fileName))
@@ -273,6 +345,79 @@ namespace LuaInterface
         public static string GetOSDir()
         {
             return LuaConst.osDir;
+        }
+        
+        
+        private byte[] ReadBytesFromAssetBundle(string fileName)
+        {
+            //使用全名， 避免冲突
+            fileName = "Assets/luabundle/" + fileName;
+
+            string bundleFileName = fileName + ".bytes";
+            int bundleCount = m_luaBundleList.Count;
+            for (int i = 0; i < bundleCount; i++)
+            {
+                AssetBundle ab = m_luaBundleList[i];
+                TextAsset luaCode = ab.LoadAsset<TextAsset>(bundleFileName);
+                if (luaCode == null)
+                {
+                    //require过来的 没有包含.lua后缀
+                    string extendStr = Path.GetExtension(fileName);
+                    if (string.IsNullOrEmpty(extendStr))
+                    {
+                        bundleFileName = fileName + ".lua.bytes";
+                        luaCode = ab.LoadAsset<TextAsset>(bundleFileName);
+                    }
+                }
+
+                byte[] luaBytes = null;
+                if (luaCode != null)
+                {
+                    // 解密
+                    luaBytes =  AESEncrypt.Decrypt(luaCode.bytes);
+                    Resources.UnloadAsset(luaCode);
+                    return luaBytes;
+                }
+            }
+
+            GameLogger.LogError("LuaFileUtils.ReadBytesFromAssetBundle " + fileName);
+            return null;
+        }
+
+        private string ReadStringFromAssetBundle(string fileName)
+        {
+            fileName = "Assets/luabundle/" + fileName;
+
+            string bundleFileName = fileName + ".bytes";
+            int bundleCount = m_luaBundleList.Count;
+            for (int i = 0; i < bundleCount; i++)
+            {
+                AssetBundle ab = m_luaBundleList[i];
+                TextAsset luaCode = ab.LoadAsset<TextAsset>(bundleFileName);
+                if (luaCode == null)
+                {
+                    //require过来的 没有包含.lua后缀
+                    string extendStr = Path.GetExtension(fileName);
+                    if (string.IsNullOrEmpty(extendStr))
+                    {
+                        bundleFileName = fileName + ".lua.bytes";
+                        luaCode = ab.LoadAsset<TextAsset>(bundleFileName);
+                    }
+                }
+
+                string luaStr = null;
+                if (luaCode != null)
+                {
+                    // 解密
+                    var bytes = AESEncrypt.Decrypt(luaCode.bytes);
+                    // 转字符串
+                    luaStr = System.Text.Encoding.GetEncoding(65001).GetString(bytes);
+                    Resources.UnloadAsset(luaCode);
+                    return luaStr;
+                }
+            }
+            return null;
+
         }
     }
 }

@@ -1481,8 +1481,17 @@ namespace LuaInterface
         ** third party library
         */
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int luaopen_sproto_core(IntPtr L);
+
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int luaopen_protobuf_c(IntPtr L);
+        
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
 	    [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static extern int luaopen_pb(IntPtr L);
+        
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int luaopen_bit32(IntPtr L);
 
 #if !LUAC_5_3
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
