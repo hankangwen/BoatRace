@@ -60,30 +60,12 @@ namespace BoatRace
             
             // 日志
             GameLogger.Init();
-            LogCat.Init();
+#if !UNITY_EDITOR
+            if(Debug.isDebugBuild)
+                LogCat.Init();
+#endif
             
             
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
-            Debugger.Log("Boat Race Client Start.");
             // // 网络消息注册
             // m_networkMsgEventRegister.RegistNetworkMsgEvent();
             // // 界面管理器
