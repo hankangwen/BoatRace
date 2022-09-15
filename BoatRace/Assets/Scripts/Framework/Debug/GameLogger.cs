@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using System.Text;
 using System.IO;
+using Object = UnityEngine.Object;
 
 public class GameLogger
 {
@@ -13,8 +15,10 @@ public class GameLogger
     // 每行日志前添加时间
     public static bool s_prefixTime = true;
 
-    // 使用StringBuilder来优化字符串的重复构造
-    private static StringBuilder s_logStr = new StringBuilder();
+    // // 使用StringBuilder来优化字符串的重复构造
+    // private static StringBuilder s_logStr = new StringBuilder();
+    // 使用CString优化性能, https://github.com/topameng/CString
+    private static CString s_logStr = new CString(256);
     // 日志文件存储位置
     private static string s_logFileSavePath;
 
@@ -45,16 +49,25 @@ public class GameLogger
     /// <param name="type">日志类型</param>
     private static void OnLogCallBack(string condition, string stackTrace, LogType type)
     {
-        if (s_prefixTime) {
-            var t = System.DateTime.Now.ToString("[HH:mm:ss.fff]");
-            s_logStr.Append(t);
-            // var nowTime = System.DateTime.Now;
-            // int hour = nowTime.Hour;
-            // int minute = nowTime.Minute;
-            // int second = nowTime.Second;
-            // s_logStr.Append(string.Format("[{0:D2}:{1:D2}:{2:D2}]", hour, minute, second));
+        s_logStr.Clear();
+        if (s_prefixTime) 
+        {
+            // var t = System.DateTime.Now.ToString("[HH:mm:ss.fff]");
+            // s_logStr.Append(t);
+            var time = System.DateTime.Now;
+            s_logStr.Append("[")
+                .Append(ConstStringTable.GetTimeIntern(time.Hour))
+                .Append(":")
+                .Append(ConstStringTable.GetTimeIntern(time.Minute))
+                .Append(":")
+                .Append(ConstStringTable.GetTimeIntern(time.Second))
+                .Append(".")
+                .Append(time.Millisecond)
+                .Append("-")
+                .Append(Time.frameCount % 999)
+                .Append("] ");
         }
-            
+        
         s_logStr.Append(condition);
         s_logStr.Append("\n");
         if(type == LogType.Error || type == LogType.Exception)
@@ -62,18 +75,21 @@ public class GameLogger
             s_logStr.Append(stackTrace);
             s_logStr.Append("\n");
         }
-
+        
         if (s_logStr.Length <= 0) return;
         if (!File.Exists(s_logFileSavePath))
         {
             var fs = File.Create(s_logFileSavePath);
             fs.Close();
         }
+
+        String dest = StringPool.Alloc(s_logStr.Length);
+        s_logStr.CopyToString(dest);
         using (var sw = File.AppendText(s_logFileSavePath))
         {
-            sw.WriteLine(s_logStr.ToString());
+            sw.WriteLine(dest);
         }
-        s_logStr.Remove(0, s_logStr.Length);
+        StringPool.Collect(dest);
     }
 
     /// <summary>
