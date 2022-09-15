@@ -10,6 +10,8 @@ namespace BoatRace
     /// </summary>
     public class StartUp : MonoBehaviour
     {
+        private NetworkMsgEventRegister m_networkMsgEventRegister;
+        
         void Awake()
         {
             // 热更新之前初始化一些模块
@@ -33,8 +35,8 @@ namespace BoatRace
 #if UNITY_EDITOR
                 ConnectEmmyLua();
 #endif
-                // LuaCall.CallFunc("Main.Init");
-                // LuaCall.CallFunc("Main.Start");
+                LuaCall.CallFunc("Main.Init");
+                LuaCall.CallFunc("Main.Start");
 
                 // 监听关闭游戏事件
                 AppQuitDefend.Init();
@@ -46,6 +48,7 @@ namespace BoatRace
         /// </summary>
         private void InitBeforeHotUpdate()
         {
+            m_networkMsgEventRegister = new NetworkMsgEventRegister();
             // 限制游戏帧数
             Application.targetFrameRate = AppConst.GameFrameRate;
             // 手机常亮
@@ -60,8 +63,8 @@ namespace BoatRace
                 LogCat.Init();
 #endif
             
-            // // 网络消息注册
-            // m_networkMsgEventRegister.RegistNetworkMsgEvent();
+            // 网络消息注册
+            m_networkMsgEventRegister.RegistNetworkMsgEvent();
             
             // 界面管理器
             PanelMgr.Instance.Init();
@@ -73,7 +76,7 @@ namespace BoatRace
             
             
             TimerThread.Instance.Init();
-            // ClientNet.instance.Init();
+            ClientNet.instance.Init();
             ScreenCapture.Init();
         }
         
@@ -147,6 +150,7 @@ namespace BoatRace
             string script =
                 @"  function ConnectEmmyLua()                        
                     pcall(function()
+                            print('Connect EmmyLua')
                             package.cpath = package.cpath .. ';' .. UnityEngine.Application.dataPath .. '/../Tools/Emmylua/emmy_core.dll'
                             local dbg = require('emmy_core')
                             dbg.tcpConnect('localhost', 9966)
