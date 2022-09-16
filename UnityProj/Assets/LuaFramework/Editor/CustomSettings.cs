@@ -8,6 +8,8 @@ using Holoville.HOTween;
 using Holoville.HOTween.Plugins.Core;
 using UnityEngine.UI;
 
+#pragma warning disable 0618
+
 namespace LuaFramework
 {
     public static class CustomSettings
@@ -85,7 +87,7 @@ namespace LuaFramework
             // _GT(typeof(Light)),
             _GT(typeof(Rigidbody)),
             _GT(typeof(Camera)),
-            _GT(typeof(AudioSource)),
+            // _GT(typeof(AudioSource)),
             //_GT(typeof(LineRenderer))
             //_GT(typeof(TrailRenderer))
     #endif
