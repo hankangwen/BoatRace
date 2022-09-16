@@ -28,8 +28,8 @@ public class StartUp : MonoBehaviour
 #if UNITY_EDITOR
             ConnectEmmyLua();
 #endif
-            // LuaCall.CallFunc("Main.Init");
-            // LuaCall.CallFunc("Main.Start");
+            LuaCall.CallFunc("Main.Init");
+            LuaCall.CallFunc("Main.Start");
 
             // 监听关闭游戏事件
             AppQuitDefend.Init();
@@ -45,7 +45,7 @@ public class StartUp : MonoBehaviour
                     pcall(function()
                             package.cpath = package.cpath .. ';' .. UnityEngine.Application.dataPath .. '/../Tools/Emmylua/emmy_core.dll'
                             local dbg = require('emmy_core')
-                            dbg.tcpConnect('localhost', 9966)
+                            dbg.tcpConnect('localhost', 9970)
                           end)
                 end
                 EmmyLuaCon = {}
