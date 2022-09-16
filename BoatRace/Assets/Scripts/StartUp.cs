@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using BoatRace.Game;
 using BoatRace.Net;
 using LuaFramework;
 using UnityEngine;
+using Debugger = LuaInterface.Debugger;
 
 namespace BoatRace
 {
@@ -14,6 +16,8 @@ namespace BoatRace
         
         void Awake()
         {
+            Debugger.Log("123");
+            
             // 热更新之前初始化一些模块
             InitBeforeHotUpdate();
             

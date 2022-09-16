@@ -103,23 +103,23 @@ namespace LuaInterface
         public LuaState()            
         {
             float time = Time.realtimeSinceStartup;
-            int version = LuaDLL.luaL_getversion();
-            Debugger.Log("lua version:{0}", version);
-#if LUAC_5_3
-            if (version != 503)
-            {
-                int major = version / 100;
-                int minor = version - major * 100;
-                throw new LuaException(string.Format("lua version mismatch need lua5.3, get lua{0}.{1}", major, minor));
-            }       
-#else
-            if (version != 501)
-            {
-                int major = version / 100;
-                int minor = version - major * 100;
-                throw new LuaException(string.Format("lua version mismatch need lua5.1, get lua{0}.{1}", major, minor));
-            }
-#endif
+//             int version = LuaDLL.luaL_getversion();
+//             Debugger.Log("lua version:{0}", version);
+// #if LUAC_5_3
+//             if (version != 503)
+//             {
+//                 int major = version / 100;
+//                 int minor = version - major * 100;
+//                 throw new LuaException(string.Format("lua version mismatch need lua5.3, get lua{0}.{1}", major, minor));
+//             }       
+// #else
+//             if (version != 501)
+//             {
+//                 int major = version / 100;
+//                 int minor = version - major * 100;
+//                 throw new LuaException(string.Format("lua version mismatch need lua5.1, get lua{0}.{1}", major, minor));
+//             }
+// #endif
 
 #if !MULTI_STATE
             if (mainState != null)
@@ -653,12 +653,12 @@ namespace LuaInterface
             LuaLoadBuffer(buffer, chunkName);
         }
 
-        public T DoString<T>(string chunk, string chunkName = "LuaState.cs")
-        {
-            byte[] buffer = Encoding.UTF8.GetBytes(chunk);
-            chunkName = LuaChunkName(chunkName);
-            return LuaLoadBuffer<T>(buffer, chunkName);
-        }
+        // public T DoString<T>(string chunk, string chunkName = "LuaState.cs")
+        // {
+        //     byte[] buffer = Encoding.UTF8.GetBytes(chunk);
+        //     chunkName = LuaChunkName(chunkName);
+        //     return LuaLoadBuffer<T>(buffer, chunkName);
+        // }
 
         byte[] LoadFileBuffer(string fileName)
         {
@@ -728,7 +728,7 @@ namespace LuaInterface
             //    fileName = LuaFileUtils.Instance.FindFile(fileName);
             //}
 
-            return LuaLoadBuffer<object[]>(buffer, fileName);
+            return LuaLoadBuffer(buffer, fileName);
         }
 
         //注意fileName与lua文件中require一致。
@@ -2235,18 +2235,19 @@ namespace LuaInterface
             iter2.Dispose();
             dict.Dispose();
         }
-
-        protected void LuaLoadBuffer(byte[] buffer, string chunkName)
-        {
-            LuaDLL.tolua_pushtraceback(L);
+        
+        protected object[] LuaLoadBuffer(byte[] buffer, string chunkName)
+        {                        
+            ToLuaPushTraceback();
             int oldTop = LuaGetTop();
 
             if (LuaLoadBuffer(buffer, buffer.Length, chunkName) == 0)
             {
                 if (LuaPCall(0, LuaDLL.LUA_MULTRET, oldTop) == 0)
-                {                    
+                {
+                    object[] result = CheckObjects(oldTop);
                     LuaSetTop(oldTop - 1);
-                    return;
+                    return result;
                 }
             }
 
@@ -2254,26 +2255,45 @@ namespace LuaInterface
             LuaSetTop(oldTop - 1);                        
             throw new LuaException(err, LuaException.GetLastError());
         }
-
-        protected T LuaLoadBuffer<T>(byte[] buffer, string chunkName)
-        {
-            LuaDLL.tolua_pushtraceback(L);
-            int oldTop = LuaGetTop();
-
-            if (LuaLoadBuffer(buffer, buffer.Length, chunkName) == 0)
-            {
-                if (LuaPCall(0, LuaDLL.LUA_MULTRET, oldTop) == 0)
-                {
-                    T result = CheckValue<T>(oldTop + 1);
-                    LuaSetTop(oldTop - 1);
-                    return result;
-                }
-            }
-
-            string err = LuaToString(-1);
-            LuaSetTop(oldTop - 1);
-            throw new LuaException(err, LuaException.GetLastError());
-        }
+        
+        // protected void LuaLoadBuffer(byte[] buffer, string chunkName)
+        // {
+        //     LuaDLL.tolua_pushtraceback(L);
+        //     int oldTop = LuaGetTop();
+        //
+        //     if (LuaLoadBuffer(buffer, buffer.Length, chunkName) == 0)
+        //     {
+        //         if (LuaPCall(0, LuaDLL.LUA_MULTRET, oldTop) == 0)
+        //         {                    
+        //             LuaSetTop(oldTop - 1);
+        //             return;
+        //         }
+        //     }
+        //
+        //     string err = LuaToString(-1);
+        //     LuaSetTop(oldTop - 1);                        
+        //     throw new LuaException(err, LuaException.GetLastError());
+        // }
+        //
+        // protected T LuaLoadBuffer<T>(byte[] buffer, string chunkName)
+        // {
+        //     LuaDLL.tolua_pushtraceback(L);
+        //     int oldTop = LuaGetTop();
+        //
+        //     if (LuaLoadBuffer(buffer, buffer.Length, chunkName) == 0)
+        //     {
+        //         if (LuaPCall(0, LuaDLL.LUA_MULTRET, oldTop) == 0)
+        //         {
+        //             T result = CheckValue<T>(oldTop + 1);
+        //             LuaSetTop(oldTop - 1);
+        //             return result;
+        //         }
+        //     }
+        //
+        //     string err = LuaToString(-1);
+        //     LuaSetTop(oldTop - 1);
+        //     throw new LuaException(err, LuaException.GetLastError());
+        // }
 
         public bool BeginCall(string name, int top, bool beLogMiss)
         {            
