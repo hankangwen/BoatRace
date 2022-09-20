@@ -61,6 +61,7 @@ Unity隐藏指定的黄色warning警告
 ### 工具
 
 [ILSpy](https://github.com/icsharpcode/ILSpy)
+[xuanyusong/unity-decompiled](https://bitbucket.org/xuanyusong/unity-decompiled/src/master/)
 
 #### Unity特殊文件夹
 1.隐藏文件夹（以.开头的文件会被忽略）
